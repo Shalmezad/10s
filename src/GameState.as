@@ -20,7 +20,10 @@ package
 			add(map);
 			
 			player = new Player();
+			player.x = map.playerStart.x;
+			player.y = map.playerStart.y;
 			add(player);
+			
 			gui = new GUI();
 			add(gui);
 		}
