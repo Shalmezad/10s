@@ -9,7 +9,13 @@ package
 	{
 		override public function create():void
 		{
-			add(new FlxText(20, 20, 200, "Test"));
+			add(new Player());
+		}
+		
+		
+		override public function update():void
+		{
+			super.update();
 		}
 	}
 
