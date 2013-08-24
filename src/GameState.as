@@ -7,12 +7,7 @@ package
 	 */
 	public class GameState extends FlxState
 	{
-		[Embed(source="../res/gfx/tilemaps/green-pyramid.png")]
-		public static const TILEMAP:Class;
-		[Embed(source="../res/content/maps/map1.csv",mimeType="application/octet-stream")]
-		public static const MAP_1:Class;
-		
-		private var map:FlxTilemap;
+		private var map:LevelMap;
 		private var player:Player;
 		private var gui:GUI;
 		private var timeLeft:Number = 10;
@@ -20,15 +15,15 @@ package
 		override public function create():void
 		{
 			FlxG.bgColor = 0xffaaaaaa;
-			map = new FlxTilemap();
-			map.loadMap(new MAP_1(), TILEMAP, 20, 20, FlxTilemap.OFF);
+			
+			map = new LevelMap(1);
 			add(map);
+			
 			player = new Player();
 			add(player);
 			gui = new GUI();
 			add(gui);
 		}
-		
 		
 		override public function update():void
 		{
