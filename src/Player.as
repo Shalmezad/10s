@@ -7,28 +7,46 @@ package
 	 */
 	public class Player extends FlxSprite
 	{
+		//vertical movement
+		private const JUMP_VELOCITY:Number = -500;
+		private const GRAVITY:Number = 300;
+		private const TERMINAL_VELOCITY:Number = 200;
+		
+		private const HORIZONTAL_ACCEL:Number = 390;
+		private const FRICTION:Number = 240;
+		private const MAX_SPEED:Number = 80;
 		
 		public function Player() 
 		{
 			super(10,10);
 			makeGraphic(10, 10, 0xffaa0000);
-			maxVelocity.x = 80;
-			drag.x = maxVelocity.x * 4;
+			maxVelocity.x = MAX_SPEED;
+			drag.x = FRICTION;
 			
-			maxVelocity.y = 200;
-			acceleration.y = 200;
+			maxVelocity.y = TERMINAL_VELOCITY;
+			acceleration.y = GRAVITY;
 		}
 		
 		override public function update():void
 		{
 			super.update();
 			acceleration.x = 0;
-			if(FlxG.keys.LEFT)
-				acceleration.x = -maxVelocity.x*4;
-			if(FlxG.keys.RIGHT)
-				acceleration.x = maxVelocity.x*4;
-			if(FlxG.keys.SPACE && isTouching(FlxObject.FLOOR))
-				velocity.y = -maxVelocity.y/2;
+			if(KEY_LEFT())
+				acceleration.x = -1 * HORIZONTAL_ACCEL;
+			if(KEY_RIGHT())
+				acceleration.x = HORIZONTAL_ACCEL;
+			if(KEY_JUMP() && isTouching(FlxObject.FLOOR))
+				velocity.y = JUMP_VELOCITY;
+		}
+		
+		private function KEY_LEFT():Boolean {
+			return FlxG.keys.LEFT || FlxG.keys.A;
+		}
+		private function KEY_RIGHT():Boolean {
+			return FlxG.keys.RIGHT || FlxG.keys.D;
+		}
+		private function KEY_JUMP():Boolean {
+			return FlxG.keys.UP || FlxG.keys.SPACE || FlxG.keys.W;
 		}
 	}
 
