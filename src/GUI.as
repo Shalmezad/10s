@@ -16,6 +16,7 @@ package
 		
 		public function setTimeLeft(time:Number):void
 		{
+			if (time < 0) time = 0;
 			var tempTime:int = time * 10;
 			if (tempTime % 10 == 0) 
 			{

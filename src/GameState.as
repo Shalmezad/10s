@@ -34,6 +34,10 @@ package
 			FlxG.collide(map, player);
 			timeLeft -= FlxG.elapsed;
 			gui.setTimeLeft(timeLeft);
+			if (timeLeft <= 0 && player.alive) {
+				player.kill();
+				add(new Explosion(player.x, player.y));
+			}
 		}
 	}
 
