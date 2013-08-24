@@ -13,7 +13,10 @@ package
 			super(10,10);
 			makeGraphic(10, 10, 0xffaa0000);
 			maxVelocity.x = 80;
-			drag.x = maxVelocity.x*4;
+			drag.x = maxVelocity.x * 4;
+			
+			maxVelocity.y = 200;
+			acceleration.y = 200;
 		}
 		
 		override public function update():void
@@ -24,6 +27,8 @@ package
 				acceleration.x = -maxVelocity.x*4;
 			if(FlxG.keys.RIGHT)
 				acceleration.x = maxVelocity.x*4;
+			if(FlxG.keys.SPACE && isTouching(FlxObject.FLOOR))
+				velocity.y = -maxVelocity.y/2;
 		}
 	}
 
