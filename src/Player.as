@@ -12,6 +12,7 @@ package
 		private const GRAVITY:Number = 300;
 		private const TERMINAL_VELOCITY:Number = 200;
 		
+		//horizontal movement
 		private const HORIZONTAL_ACCEL:Number = 390;
 		private const FRICTION:Number = 240;
 		private const MAX_SPEED:Number = 80;
