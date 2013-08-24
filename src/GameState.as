@@ -7,6 +7,8 @@ package
 	 */
 	public class GameState extends FlxState
 	{
+		[Embed(source="../res/gfx/tilemaps/green-pyramid.png")]
+		public static const TILEMAP:Class;
 		[Embed(source="../res/content/maps/map1.csv",mimeType="application/octet-stream")]
 		public static const MAP_1:Class;
 		
@@ -19,7 +21,7 @@ package
 		{
 			FlxG.bgColor = 0xffaaaaaa;
 			map = new FlxTilemap();
-			map.loadMap(new MAP_1(), FlxTilemap.ImgAuto, 0, 0, FlxTilemap.AUTO);
+			map.loadMap(new MAP_1(), TILEMAP, 20, 20, FlxTilemap.OFF);
 			add(map);
 			player = new Player();
 			add(player);
@@ -37,6 +39,9 @@ package
 			if (timeLeft <= 0 && player.alive) {
 				player.kill();
 				add(new Explosion(player.x, player.y));
+			}
+			if (timeLeft < -3) {
+				FlxG.switchState(new GameState());
 			}
 		}
 	}
