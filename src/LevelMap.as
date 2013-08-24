@@ -11,6 +11,10 @@ package
 		public static const TILEMAP:Class;
 		[Embed(source="../res/content/maps/map1.csv",mimeType="application/octet-stream")]
 		public static const MAP_1:Class;
+		[Embed(source="../res/content/maps/map2.csv",mimeType="application/octet-stream")]
+		public static const MAP_2:Class;
+		[Embed(source="../res/content/maps/map3.csv",mimeType="application/octet-stream")]
+		public static const MAP_3:Class;
 		
 		public const TILE_WIDTH:int = 20;
 		public const TILE_HEIGHT:int = 20;
@@ -45,7 +49,9 @@ package
 				playerStart = new FlxPoint(20, 20);
 			}
 			endPoints = getTileInstances(END_TILE);
-			
+			if (endPoints == null) {
+				endPoints = new Array();
+			}
 			
 			//replace the start/end points
 			changeTiles(START_TILE, 0);
@@ -66,7 +72,18 @@ package
 		public function loadLevel(levelNum:int = 1) :void
 		{
 			//TODO: Load level based on level number
-			load(MAP_1, TILEMAP);
+			if(levelNum == 1){
+				load(MAP_1, TILEMAP);
+			}
+			else if (levelNum == 2) {
+				load(MAP_2, TILEMAP);
+			}
+			else if (levelNum == 3) {
+				load(MAP_3, TILEMAP);
+			}
+			else {
+				load(MAP_3, TILEMAP);
+			}
 		}
 		
 	}

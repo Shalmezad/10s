@@ -11,6 +11,7 @@ package
 		public function GUI() 
 		{
 			timeLeft = new FlxText(20, 20, 50, "10.0");
+			timeLeft.size = 20;
 			add(timeLeft);
 		}
 		
@@ -25,6 +26,9 @@ package
 			else 
 			{
 				timeLeft.text = "" + tempTime/10.0;
+			}
+			if (time < 4.0) {
+				timeLeft.color = 0xff0000;
 			}
 		}
 	}

@@ -12,12 +12,17 @@ package
 		private var gui:GUI;
 		private var timeLeft:Number = 10;
 		private var exits:FlxGroup;
+		private var levelNum:int;
+		
+		public function GameState(level:int = 1) {
+			levelNum = level;
+		}
 		
 		override public function create():void
 		{
 			FlxG.bgColor = 0xffaaaaaa;
 			
-			map = new LevelMap(1);
+			map = new LevelMap(levelNum);
 			add(map);
 			
 			loadExits();
@@ -56,12 +61,15 @@ package
 				add(new Explosion(player.x, player.y));
 			}
 			if (timeLeft < -3) {
-				FlxG.switchState(new GameState());
+				gameOver();
 			}
 		}
 		private function reachedExit(a:FlxObject, b:FlxObject):void
 		{
-			FlxG.switchState(new GameState());
+			FlxG.switchState(new GameState(levelNum+1));
+		}
+		private function gameOver() {
+			FlxG.switchState(new GameState(1));
 		}
 	}
 
