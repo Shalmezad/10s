@@ -27,8 +27,16 @@ package
 			{
 				timeLeft.text = "" + tempTime/10.0;
 			}
-			if (time < 4.0) {
-				timeLeft.color = 0xff0000;
+			//if (time < 4.0) {
+			//	timeLeft.color = 0xff0000;
+			//}
+			if(time < 5){
+				timeLeft.color = 	(int)(255) << 16 |
+									(int)(time / 5.0 * 255) << 8;
+			}
+			else {
+				timeLeft.color = 	(int)((10 - time) / 5.0 * 255) << 16 |
+									(int)(255) << 8;
 			}
 		}
 	}
