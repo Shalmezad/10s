@@ -12,6 +12,9 @@ package
 		
 		private var map:FlxTilemap;
 		private var player:Player;
+		private var gui:GUI;
+		private var timeLeft:Number = 10;
+		
 		override public function create():void
 		{
 			FlxG.bgColor = 0xffaaaaaa;
@@ -20,6 +23,8 @@ package
 			add(map);
 			player = new Player();
 			add(player);
+			gui = new GUI();
+			add(gui);
 		}
 		
 		
@@ -27,6 +32,8 @@ package
 		{
 			super.update();
 			FlxG.collide(map, player);
+			timeLeft -= FlxG.elapsed;
+			gui.setTimeLeft(timeLeft);
 		}
 	}
 
