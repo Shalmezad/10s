@@ -54,6 +54,11 @@ package
 			super.update();
 			FlxG.collide(map, player);
 			FlxG.overlap(exits, player, reachedExit);
+			if (!player.onScreen()) {
+				if (timeLeft > 0) {
+					timeLeft = 0;
+				}
+			}
 			timeLeft -= FlxG.elapsed;
 			gui.setTimeLeft(timeLeft);
 			if (timeLeft <= 0 && player.alive) {
@@ -68,7 +73,8 @@ package
 		{
 			FlxG.switchState(new GameState(levelNum+1));
 		}
-		private function gameOver() {
+		private function gameOver():void
+		{
 			FlxG.switchState(new GameState(1));
 		}
 	}
