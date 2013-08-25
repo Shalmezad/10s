@@ -30,6 +30,12 @@ package
 		[Embed(source="../res/content/maps/map10.csv",mimeType="application/octet-stream")]
 		public static const MAP_10:Class;
 		
+		public static const MAPS:Array = [	MAP_1, MAP_2,
+											MAP_3, MAP_4,
+											MAP_5, MAP_6,
+											MAP_7, MAP_8,
+											MAP_9, MAP_10];
+		
 		public const TILE_WIDTH:int = 20;
 		public const TILE_HEIGHT:int = 20;
 		
@@ -92,39 +98,12 @@ package
 		
 		public function loadLevel(levelNum:int = 1) :void
 		{
-			//TODO: Load level based on level number
-			if(levelNum == 1){
-				load(MAP_1, TILEMAP);
-			}
-			else if (levelNum == 2) {
-				load(MAP_2, TILEMAP);
-			}
-			else if (levelNum == 3) {
-				load(MAP_3, TILEMAP);
-			}
-			else if (levelNum == 4) {
-				load(MAP_4, TILEMAP);
-			}
-			else if (levelNum == 5) {
-				load(MAP_5, TILEMAP);
-			}
-			else if (levelNum == 6) {
-				load(MAP_6, TILEMAP);
-			}
-			else if (levelNum == 7) {
-				load(MAP_7, TILEMAP);
-			}
-			else if (levelNum == 8) {
-				load(MAP_8, TILEMAP);
-			}
-			else if (levelNum == 9) {
-				load(MAP_9, TILEMAP);
-			}
-			else if (levelNum == 10) {
-				load(MAP_10, TILEMAP);
+			var level:int = levelNum - 1;
+			if (level < MAPS.length) {
+				load(MAPS[level], TILEMAP);
 			}
 			else {
-				load(MAP_7, TILEMAP);
+				load(MAPS[MAPS.length - 1], TILEMAP);
 			}
 		}
 		
