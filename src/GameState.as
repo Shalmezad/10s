@@ -12,6 +12,7 @@ package
 		private var gui:GUI;
 		private var timeLeft:Number = 10;
 		private var exits:FlxGroup;
+		private var spikes:FlxGroup;
 		private var levelNum:int;
 		
 		public function GameState(level:int = 1) {
@@ -26,6 +27,7 @@ package
 			add(map);
 			
 			loadExits();
+			loadSpikes();
 			
 			player = new Player();
 			player.x = map.playerStart.x;
@@ -49,26 +51,55 @@ package
 			add(exits);
 		}
 		
+		private function loadSpikes():void
+		{
+			spikes = new FlxGroup();
+			for (var a:int = 0; a < map.spikePoints.length; a++) {
+				var spikeIndex:int = map.spikePoints[a];
+				var spike:Spike = new Spike();
+				spike.x = spikeIndex % map.widthInTiles;
+				spike.y = (int)(spikeIndex / map.widthInTiles);
+				spike.x *= map.TILE_WIDTH;
+				spike.y *= map.TILE_HEIGHT;
+				spikes.add(spike);
+			}
+			add(spikes);
+		}
+		
 		override public function update():void
 		{
 			super.update();
 			FlxG.collide(map, player);
 			FlxG.overlap(exits, player, reachedExit);
+			FlxG.overlap(spikes, player, hitSpike);
 			if (!player.onScreen()) {
-				if (timeLeft > 0) {
-					timeLeft = 0;
-				}
+				killPlayer();
 			}
 			timeLeft -= FlxG.elapsed;
 			gui.setTimeLeft(timeLeft);
-			if (timeLeft <= 0 && player.alive) {
-				player.kill();
-				add(new Explosion(player.x, player.y));
+			if (timeLeft <= 0) {
+				killPlayer();
 			}
 			if (timeLeft < -3) {
 				gameOver();
 			}
 		}
+		
+		private function killPlayer():void
+		{
+			if (timeLeft > 0) {
+				timeLeft = 0;
+			}
+			if (player.alive) {
+				player.kill();
+				add(new Explosion(player.x, player.y));
+			}
+		}
+		private function hitSpike(a:FlxObject, b:FlxObject):void
+		{
+			killPlayer();
+		}
+		
 		private function reachedExit(a:FlxObject, b:FlxObject):void
 		{
 			FlxG.switchState(new GameState(levelNum+1));

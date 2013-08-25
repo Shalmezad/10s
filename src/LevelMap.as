@@ -21,15 +21,19 @@ package
 		public static const MAP_5:Class;
 		[Embed(source="../res/content/maps/map6.csv",mimeType="application/octet-stream")]
 		public static const MAP_6:Class;
+		[Embed(source="../res/content/maps/map7.csv",mimeType="application/octet-stream")]
+		public static const MAP_7:Class;
 		
 		public const TILE_WIDTH:int = 20;
 		public const TILE_HEIGHT:int = 20;
 		
+		public const SPIKE_TILES:int = 7;
 		public const START_TILE:int = 8;
 		public const END_TILE:int = 9;
 		
 		public var playerStart:FlxPoint;
 		public var endPoints:Array;
+		public var spikePoints:Array;
 		
 		public function LevelMap(levelNum:int = -1) 
 		{
@@ -58,10 +62,15 @@ package
 			if (endPoints == null) {
 				endPoints = new Array();
 			}
+			spikePoints = getTileInstances(SPIKE_TILES);
+			if (spikePoints == null) {
+				spikePoints = new Array();
+			}
 			
 			//replace the start/end points
 			changeTiles(START_TILE, 0);
 			changeTiles(END_TILE, 0);
+			changeTiles(SPIKE_TILES, 0);
 		}
 		
 		public function changeTiles(search:int, replace:int):void
@@ -96,8 +105,11 @@ package
 			else if (levelNum == 6) {
 				load(MAP_6, TILEMAP);
 			}
+			else if (levelNum == 7) {
+				load(MAP_7, TILEMAP);
+			}
 			else {
-				load(MAP_3, TILEMAP);
+				load(MAP_7, TILEMAP);
 			}
 		}
 		
