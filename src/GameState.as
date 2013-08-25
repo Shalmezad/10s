@@ -114,11 +114,11 @@ package
 			}
 		}
 		private function gameWin():void {
-			FlxG.switchState(new MenuState());
+			FlxG.switchState(new GameOver(true));
 		}
 		private function gameOver():void
 		{
-			FlxG.switchState(new MenuState());
+			FlxG.switchState(new GameOver(false));
 		}
 	}
 
