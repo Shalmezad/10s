@@ -105,8 +105,16 @@ package
 		
 		private function reachedExit(a:FlxObject, b:FlxObject):void
 		{
-			GUI.score += timeLeft * 100;
-			FlxG.switchState(new GameState(levelNum+1));
+			GUI.score += timeLeft * 50;
+			if(levelNum < 10){
+				FlxG.switchState(new GameState(levelNum + 1));
+			}
+			else {
+				gameWin();
+			}
+		}
+		private function gameWin():void {
+			FlxG.switchState(new GameState());
 		}
 		private function gameOver():void
 		{
