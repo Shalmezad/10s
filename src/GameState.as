@@ -61,6 +61,9 @@ package
 				spike.y = (int)(spikeIndex / map.widthInTiles);
 				spike.x *= map.TILE_WIDTH;
 				spike.y *= map.TILE_HEIGHT;
+				spike.width = 10;
+				spike.height = 10;
+				spike.centerOffsets(true);
 				spikes.add(spike);
 			}
 			add(spikes);
@@ -106,7 +109,7 @@ package
 		}
 		private function gameOver():void
 		{
-			FlxG.switchState(new GameState(1));
+			FlxG.switchState(new GameState());
 		}
 	}
 

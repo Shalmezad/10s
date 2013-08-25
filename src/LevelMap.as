@@ -23,6 +23,8 @@ package
 		public static const MAP_6:Class;
 		[Embed(source="../res/content/maps/map7.csv",mimeType="application/octet-stream")]
 		public static const MAP_7:Class;
+		[Embed(source="../res/content/maps/map8.csv",mimeType="application/octet-stream")]
+		public static const MAP_8:Class;
 		
 		public const TILE_WIDTH:int = 20;
 		public const TILE_HEIGHT:int = 20;
@@ -107,6 +109,9 @@ package
 			}
 			else if (levelNum == 7) {
 				load(MAP_7, TILEMAP);
+			}
+			else if (levelNum == 8) {
+				load(MAP_8, TILEMAP);
 			}
 			else {
 				load(MAP_7, TILEMAP);
